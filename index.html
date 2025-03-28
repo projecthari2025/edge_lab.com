@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdgeLabs - Premium Tech Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #64748b;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --gradient: linear-gradient(135deg, #6366f1, #4f46e5);
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: var(--gradient);
+            padding: 1.5rem 0;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: -0.5px;
+        }
+
+        .categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+        }
+
+        .category-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 2rem;
+            background: white;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-btn.active {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.prev { left: 1rem; }
+        .carousel-btn.next { right: 1rem; }
+
+        .project-info {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .project-description {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .project-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .project-author::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        .project-price {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .coupon-section {
+            margin: 1.5rem 0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .coupon-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .coupon-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .apply-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .request-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .request-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary);
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .categories {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .category-btn {
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">EdgeLabs</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="categories">
+            <button class="category-btn active" data-category="all">All Projects</button>
+            <button class="category-btn" data-category="software">Software</button>
+            <button class="category-btn" data-category="hardware">Hardware</button>
+            <button class="category-btn" data-category="cyber">Cyber Security</button>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid"></div>
+    </main>
+
+    <div class="modal" id="requestModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Request Project</h2>
+            <form id="requestForm">
+                <div class="form-group">
+                    <label class="form-label" for="name">Your Name</label>
+                    <input type="text" id="name" name="name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="college">College Name</label>
+                    <input type="text" id="college" name="college" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="notes">Additional Notes</label>
+                    <textarea id="notes" name="notes" class="form-input" rows="3"></textarea>
+                </div>
+                <button type="submit" class="request-btn">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const projects = [
+            {
+                id: 1,
+                name: "AI-Powered Analytics Platform",
+                category: "software",
+                images: [
+                    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
+                ],
+                description: "Advanced analytics platform using machine learning algorithms for business intelligence.",
+                price: 2999,
+                couponCode: "AITECH10",
+                author: "Dr. Sarah Chen"
+            },
+            {
+                id: 2,
+                name: "Smart Home Security System",
+                category: "hardware",
+                images: [
+                    "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80"
+                ],
+                description: "Comprehensive security system with motion detection and smart alerts.",
+                price: 1499,
+                couponCode: "SECURE10",
+                author: "James Wilson"
+            },
+            {
+                id: 3,
+                name: "Network Penetration Testing Suite",
+                category: "cyber",
+                images: [
+                    "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1563986768494-4dee09f4813a?auto=format&fit=crop&w=1200&q=80"
+                ],
+                description: "Professional-grade security testing tools for enterprise networks.",
+                price: 3999,
+                couponCode: "CYBER10",
+                author: "Alex Martinez"
+            }
+        ];
+
+        function createProjectCard(project) {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.innerHTML = `
+                <div class="carousel">
+                    <div class="carousel-images" style="width: ${project.images.length * 100}%">
+                        ${project.images.map(img => `<img src="${img}" alt="${project.name}">`).join('')}
+                    </div>
+                    <button class="carousel-btn prev">&lt;</button>
+                    <button class="carousel-btn next">&gt;</button>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">${project.name}</h3>
+                    <p class="project-description">${project.description}</p>
+                    <p class="project-author">By ${project.author}</p>
+                    <div class="project-price">$${project.price.toLocaleString()}</div>
+                    <div class="coupon-section">
+                        <input type="text" class="coupon-input" placeholder="Enter coupon code">
+                        <button class="apply-btn">Apply</button>
+                    </div>
+                    <button class="request-btn">Request Project</button>
+                </div>
+            `;
+
+            // Carousel functionality
+            let currentSlide = 0;
+            const carousel = card.querySelector('.carousel-images');
+            const slides = project.images.length;
+
+            card.querySelector('.prev').addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + slides) % slides;
+                carousel.style.transform = `translateX(-${currentSlide * (100/slides)}%)`;
+            });
+
+            card.querySelector('.next').addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % slides;
+                carousel.style.transform = `translateX(-${currentSlide * (100/slides)}%)`;
+            });
+
+            // Coupon functionality
+            const couponInput = card.querySelector('.coupon-input');
+            const applyBtn = card.querySelector('.apply-btn');
+            const priceElement = card.querySelector('.project-price');
+
+            applyBtn.addEventListener('click', () => {
+                if (couponInput.value.toUpperCase() === project.couponCode) {
+                    const discountedPrice = project.price * 0.9;
+                    priceElement.innerHTML = `
+                        <span style="text-decoration: line-through; color: var(--secondary)">$${project.price.toLocaleString()}</span>
+                        <span style="color: var(--primary)">$${discountedPrice.toLocaleString()}</span>
+                    `;
+                    couponInput.disabled = true;
+                    applyBtn.disabled = true;
+                } else {
+                    alert('Invalid coupon code!');
+                }
+            });
+
+            // Request button functionality
+            card.querySelector('.request-btn').addEventListener('click', () => {
+                const modal = document.getElementById('requestModal');
+                modal.style.display = 'flex';
+                
+                const form = document.getElementById('requestForm');
+                form.onsubmit = (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const price = priceElement.textContent.split('$').pop();
+                    
+                    const subject = encodeURIComponent(`Project Request: ${project.name}`);
+                    const body = encodeURIComponent(
+                        `Project Details:\n` +
+                        `---------------\n` +
+                        `Project: ${project.name}\n` +
+                        `Price: $${price}\n` +
+                        `Author: ${project.author}\n` +
+                        `Description: ${project.description}\n\n` +
+                        `Contact Information:\n` +
+                        `-------------------\n` +
+                        `Name: ${formData.get('name')}\n` +
+                        `College: ${formData.get('college')}\n` +
+                        `Phone: ${formData.get('phone')}\n\n` +
+                        `Additional Notes:\n` +
+                        `----------------\n` +
+                        `${formData.get('notes') || 'None'}`
+                    );
+                    
+                    window.location.href = `https://mail.google.com/mail/?view=cm&fs=1&to=contact@edgelabs.com&su=${subject}&body=${body}`;
+                    modal.style.display = 'none';
+                    form.reset();
+                };
+            });
+
+            return card;
+        }
+
+        // Category filtering
+        const projectsGrid = document.getElementById('projectsGrid');
+        const categoryButtons = document.querySelectorAll('.category-btn');
+
+        function filterProjects(category) {
+            projectsGrid.innerHTML = '';
+            const filteredProjects = category === 'all' 
+                ? projects 
+                : projects.filter(p => p.category === category);
+            
+            filteredProjects.forEach(project => {
+                projectsGrid.appendChild(createProjectCard(project));
+            });
+        }
+
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterProjects(btn.dataset.category);
+            });
+        });
+
+        // Modal close functionality
+        document.querySelector('.close-modal').addEventListener('click', () => {
+            document.getElementById('requestModal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('requestModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Initial load
+        filterProjects('all');
+    </script>
+</body>
+</html>
